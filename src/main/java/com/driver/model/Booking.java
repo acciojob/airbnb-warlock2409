@@ -28,6 +28,9 @@ public class Booking {
         this.bookingPersonName = bookingPersonName;
         this.hotelName = hotelName;
     }
+    public Booking() {
+        // Default constructor for Jackson deserialization
+    }
 
     public String getBookingId() {
         return bookingId;
