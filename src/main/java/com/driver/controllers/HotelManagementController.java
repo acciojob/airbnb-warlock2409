@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @RequestMapping("/hotel")
@@ -38,7 +35,7 @@ public class HotelManagementController {
 
         //Assume that user will always be a valid user and return the aadharCardNo of the user
 
-       return service.AddUser(user);
+        return service.AddUser(user);
     }
 
     @GetMapping("/get-hotel-with-most-facilities")
@@ -59,16 +56,16 @@ public class HotelManagementController {
         //Have bookingId as a random UUID generated String
         //save the booking Entity and keep the bookingId as a primary key
         //Calculate the total amount paid by the person based on no. of rooms booked and price of the room per night.
-        //If there arent enough rooms available in the hotel that we are trying to book return -1 
+        //If there arent enough rooms available in the hotel that we are trying to book return -1
         //in other case return total amount paid
         int res= service.bookRoom(booking);
         if(res != -1){
             return res;
         }
-        
+
         return -1;
     }
-    
+
     @GetMapping("/get-bookings-by-a-person/{aadharCard}")
     public int getBookings(@PathVariable("aadharCard")Integer aadharCard)
     {
@@ -77,13 +74,12 @@ public class HotelManagementController {
     }
 
     @PutMapping("/update-facilities")
-    public Hotel updateFacilities(@RequestBody Util updateFacilities){
-
+    public Hotel updateFacilities(List<Facility> newFacilities, String hotelName, Facility newFacilitiess[]){
         //We are having a new facilites that a hotel is planning to bring.
         //If the hotel is already having that facility ignore that facility otherwise add that facility in the hotelDb
         //return the final updated List of facilities and also update that in your hotelDb
         //Note that newFacilities can also have duplicate facilities possible
-        Hotel update = service.updateFacilities(updateFacilities.getNewFacilities(),updateFacilities.getHotelName());
+        Hotel update = service.updateFacilities(newFacilities,hotelName);
         if(update != null){
             return update;
         }

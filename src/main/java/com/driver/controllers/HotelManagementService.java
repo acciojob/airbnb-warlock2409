@@ -48,7 +48,7 @@ public class HotelManagementService {
         return user.getaadharCardNo();
 
     }
-    Hotel updateFacilities(List<Facility> f, String name){
+    Hotel updateFacilities(List <Facility> f, String name){
 
         Set<Facility> hf = new HashSet<>();
         for(int i=0;i<f.size();i++){
@@ -56,7 +56,7 @@ public class HotelManagementService {
                hf.add(f.get(i));
             }
         }
-        System.out.println(hf+" "+hm);
+        System.out.println(hf+" "+hm+"");
 
         for(String hotelName : hm.keySet()){
             System.out.println(hotelName);
